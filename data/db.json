@@ -1,0 +1,16 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "title": "Learn more JavaScript!",
+      "details": "lorem ipsum",
+      "complete": false
+    },
+    {
+      "id": 2,
+      "title": "Learn Node & Deno!",
+      "details": "lorem ipsum",
+      "complete": true
+    }
+  ]
+}

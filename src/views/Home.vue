@@ -2,18 +2,20 @@
   <section>
     <div v-if="projects.length" class="projects">
       <div v-for="project in projects" :key="project.id">
-        <h3 class="projects__title">{{ project.title }}</h3>
-        <p class="projects__details">{{ project.details }}</p>
+        <SingleProject :project="project" />
       </div>
     </div>
   </section>
 </template>
 
 <script>
-// @ is an alias to /src
+import SingleProject from '../components/SingleProject.vue';
 
 export default {
   name: 'Home',
+  components: {
+    SingleProject,
+  },
   data() {
     return {
       projects: [],

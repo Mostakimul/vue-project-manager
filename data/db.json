@@ -11,6 +11,18 @@
       "title": "Learn Node & Deno!",
       "details": "lorem ipsum",
       "complete": true
+    },
+    {
+      "title": "Finish the task quiqely...",
+      "details": "Dai ferfavore",
+      "complete": true,
+      "id": 3
+    },
+    {
+      "title": "Finish Node Js Course.",
+      "details": "Lorem Ipsum details goes here/....",
+      "complete": false,
+      "id": 4
     }
   ]
 }

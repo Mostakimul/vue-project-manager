@@ -1,5 +1,6 @@
 <template>
   <section>
+    <FilterTask :curFilter="curFilter" @filterChange="curFilter = $event" />
     <div v-if="projects.length" class="projects">
       <div v-for="project in projects" :key="project.id">
         <SingleProject
@@ -14,15 +15,18 @@
 
 <script>
 import SingleProject from '../components/SingleProject.vue';
+import FilterTask from '../components/FilterTask.vue';
 
 export default {
   name: 'Home',
   components: {
     SingleProject,
+    FilterTask,
   },
   data() {
     return {
       projects: [],
+      curFilter: 'all',
     };
   },
   methods: {

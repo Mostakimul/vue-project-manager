@@ -4,7 +4,7 @@
   </div>
 
   <!-- Form -->
-  <form class="projectForm">
+  <form @submit.prevent="handleUpdate" class="projectForm">
     <label class="projectForm__label">Title: </label>
     <input v-model="title" type="text" class="projectForm__input" required />
     <label class="projectForm__label">Details:</label>
@@ -40,6 +40,26 @@ export default {
         this.title = data.title;
         this.details = data.details;
       });
+  },
+  methods: {
+    handleUpdate() {
+      let updatedProject = {
+        title: this.title,
+        details: this.details,
+      };
+      // updating
+      fetch(this.uri, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updatedProject),
+      })
+        .then(() => {
+          this.$router.push('/');
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
 };
 </script>

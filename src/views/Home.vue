@@ -2,7 +2,7 @@
   <section>
     <FilterTask :curFilter="curFilter" @filterChange="curFilter = $event" />
     <div v-if="projects.length" class="projects">
-      <div v-for="project in projects" :key="project.id">
+      <div v-for="project in filteredProjects" :key="project.id">
         <SingleProject
           :project="project"
           @delete="handleDelete"
@@ -47,6 +47,17 @@ export default {
       .then((res) => res.json())
       .then((data) => (this.projects = data))
       .catch((err) => console.log(err.message));
+  },
+  computed: {
+    filteredProjects() {
+      if (this.curFilter === 'completed') {
+        return this.projects.filter((project) => project.complete);
+      }
+      if (this.curFilter === 'ongoing') {
+        return this.projects.filter((project) => !project.complete);
+      }
+      return this.projects;
+    },
   },
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="project">
+  <div class="project" :class="{ complete: project.complete }">
     <div class="project__title">
       <h3 @click="showDetails = !showDetails">{{ project.title }}</h3>
       <div class="project__icon">
@@ -9,7 +9,7 @@
         <span @click="deleteProject()" class="material-icons">
           delete
         </span>
-        <span class="material-icons">
+        <span @click="toggleComplete" class="material-icons done">
           done
         </span>
       </div>
@@ -39,6 +39,21 @@ export default {
     deleteProject() {
       fetch(this.uri, { method: 'DELETE' })
         .then(() => this.$emit('delete', this.project.id))
+        .catch((err) => console.log(err));
+    },
+    toggleComplete() {
+      fetch(this.uri, {
+        method: 'PATCH',
+        headers: { 'Content-type': 'application/json' },
+
+        body: JSON.stringify({
+          // it will reverse the complete value
+          complete: !this.project.complete,
+        }),
+      })
+        .then(() => {
+          this.$emit('complete', this.project.id);
+        })
         .catch((err) => console.log(err));
     },
   },
@@ -84,5 +99,11 @@ export default {
   .fade-leave-to {
     opacity: 0;
   }
+}
+.complete {
+  border-left: 0.4rem solid #00ce7f;
+}
+.project.complete .done {
+  color: #00ce7f;
 }
 </style>

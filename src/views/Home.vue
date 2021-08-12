@@ -2,7 +2,11 @@
   <section>
     <div v-if="projects.length" class="projects">
       <div v-for="project in projects" :key="project.id">
-        <SingleProject :project="project" @delete="handleDelete" />
+        <SingleProject
+          :project="project"
+          @delete="handleDelete"
+          @complete="handleComplete"
+        />
       </div>
     </div>
   </section>
@@ -26,6 +30,12 @@ export default {
       this.projects = this.projects.filter((project) => {
         return project.id !== id;
       });
+    },
+    handleComplete(id) {
+      let res = this.projects.find((project) => {
+        return project.id === id;
+      });
+      res.complete = !res.complete;
     },
   },
   mounted() {
